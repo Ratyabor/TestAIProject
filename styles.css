@@ -1,0 +1,769 @@
+/* =========================================================
+   Кольори взяті з мотоцикла на фото:
+   синій бак «Legend Blue», золоті вилка й диски, графітова рама.
+   ========================================================= */
+:root {
+  --bg: #f3f0e8;
+  --bg-2: #e9e4d8;
+  --surface: rgba(255, 255, 255, .82);
+  --surface-solid: #ffffff;
+  --text: #15181d;
+  --muted: #545a66;
+  --border: rgba(21, 24, 29, .12);
+
+  --blue: #1d4fa8;          /* бак */
+  --blue-deep: #0f2f6e;
+  --gold: #b98a22;          /* вилка, диски */
+  --gold-soft: #e3c27a;
+  --graphite: #2a2e35;      /* рама, двигун */
+
+  --accent: var(--blue);
+  --accent-text: #ffffff;
+  --accent-soft: rgba(29, 79, 168, .1);
+
+  --shape-blue: rgba(29, 79, 168, .16);
+  --shape-gold: rgba(185, 138, 34, .22);
+  --shape-dark: rgba(42, 46, 53, .08);
+  --shape-line: rgba(29, 79, 168, .22);
+
+  --shadow: 0 2px 6px rgba(0,0,0,.05), 0 20px 50px rgba(15, 47, 110, .12);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0e1116;
+  --bg-2: #141922;
+  --surface: rgba(24, 29, 38, .82);
+  --surface-solid: #181d26;
+  --text: #eceef2;
+  --muted: #a4abb8;
+  --border: rgba(255, 255, 255, .1);
+
+  --blue: #4f86ec;
+  --blue-deep: #1d4fa8;
+  --gold: #e0b453;
+  --gold-soft: #f0d08a;
+  --graphite: #c9ced8;
+
+  --accent: #7da6ff;
+  --accent-text: #0b1020;
+  --accent-soft: rgba(125, 166, 255, .14);
+
+  --shape-blue: rgba(79, 134, 236, .2);
+  --shape-gold: rgba(224, 180, 83, .16);
+  --shape-dark: rgba(255, 255, 255, .04);
+  --shape-line: rgba(125, 166, 255, .25);
+
+  --shadow: 0 2px 6px rgba(0,0,0,.4), 0 24px 60px rgba(0,0,0,.45);
+  color-scheme: dark;
+}
+
+/* ---------- База ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  transition: background-color .3s ease, color .3s ease;
+}
+
+img { max-width: 100%; display: block; }
+main { overflow-x: clip; }
+a { color: var(--accent); }
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* =========================================================
+   Геометричний фон (фіксований шар з паралаксом)
+   ========================================================= */
+.bg-shapes {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 85% -10%, var(--shape-blue), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, var(--shape-gold), transparent 60%),
+    var(--bg);
+  transition: background .3s ease;
+}
+
+.bg-shapes .s {
+  position: absolute;
+  will-change: transform;
+}
+
+/* Сітка з крапок */
+.bg-shapes .dots {
+  inset: 0;
+  background-image: radial-gradient(var(--shape-dark) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+}
+
+/* Великий синій трикутник */
+.bg-shapes .tri-blue {
+  top: 6%;
+  right: -8%;
+  width: 46vw;
+  height: 46vw;
+  max-width: 620px;
+  max-height: 620px;
+  background: var(--shape-blue);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* Золоте кільце — як диск колеса */
+.bg-shapes .ring-gold {
+  top: 52%;
+  left: -6%;
+  width: 34vw;
+  height: 34vw;
+  max-width: 460px;
+  max-height: 460px;
+  border-radius: 50%;
+  border: clamp(18px, 3vw, 40px) solid var(--shape-gold);
+}
+
+/* Мале кільце */
+.bg-shapes .ring-blue {
+  top: 18%;
+  left: 8%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--shape-line);
+}
+
+/* Гоночні смуги */
+.bg-shapes .stripes {
+  top: 70%;
+  right: 4%;
+  width: 380px;
+  height: 120px;
+  transform-origin: center;
+  background: repeating-linear-gradient(
+    -55deg,
+    var(--shape-blue) 0 18px,
+    transparent 18px 30px,
+    var(--shape-gold) 30px 40px,
+    transparent 40px 64px
+  );
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+}
+
+/* Ромб */
+.bg-shapes .diamond {
+  top: 38%;
+  right: 22%;
+  width: 70px;
+  height: 70px;
+  border: 2px solid var(--gold);
+  opacity: .35;
+  transform: rotate(45deg);
+}
+
+/* Шестикутник */
+.bg-shapes .hex {
+  top: 86%;
+  left: 30%;
+  width: 150px;
+  height: 130px;
+  background: var(--shape-blue);
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+
+/* =========================================================
+   Хедер
+   ========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 64px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: .06em;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.logo span { color: var(--accent); }
+.logo .mark {
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, var(--blue) 0 50%, var(--gold) 50% 100%);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.nav a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .95rem;
+  white-space: nowrap;
+  transition: color .2s, background .2s;
+}
+.nav a:hover { color: var(--text); background: var(--accent-soft); }
+.nav a[aria-current="page"] { color: var(--accent-text); background: var(--accent); }
+
+/* Перемикач теми */
+.theme-toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 56px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  cursor: pointer;
+}
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-toggle .knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--surface-solid);
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  line-height: 1;
+  transition: transform .25s ease;
+}
+[data-theme="dark"] .theme-toggle .knob { transform: translateX(26px); }
+.theme-toggle .knob::before { content: "☀"; color: var(--gold); }
+[data-theme="dark"] .theme-toggle .knob::before { content: "☾"; color: var(--accent); }
+
+/* =========================================================
+   Типографіка й кнопки
+   ========================================================= */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue) 0 60%, var(--gold) 60%);
+}
+
+h1 {
+  margin: 0 0 20px;
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+h1 .gold { color: var(--gold); }
+h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+h3 { margin: 0 0 8px; font-size: 1.15rem; }
+
+.lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+.section-head { max-width: 680px; margin-bottom: 40px; }
+.section-head p { color: var(--muted); margin: 0; font-size: 1.05rem; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px -8px var(--accent);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -8px var(--accent); }
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  box-shadow: none;
+}
+.btn.ghost:hover { border-color: var(--accent); }
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  min-height: calc(100svh - 64px);
+  padding-block: 40px 80px;
+}
+
+.hero-media {
+  position: relative;
+  margin: 0;
+}
+/* Синьо-золота пластина позаду фото */
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 8% -5% 24px 10%;
+  z-index: -1;
+  background: linear-gradient(135deg, var(--blue) 0 55%, var(--gold) 55% 62%, var(--blue-deep) 62%);
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+  border-radius: 10px;
+}
+.hero-media img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.hero-media figcaption {
+  margin-top: 16px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+.hero-media figcaption a { color: var(--muted); }
+
+.badge {
+  position: absolute;
+  left: -18px;
+  bottom: 40px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--surface-solid);
+  box-shadow: var(--shadow);
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+.badge b { display: block; font-size: 1.3rem; color: var(--text); }
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: .75rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.scroll-hint::after {
+  content: "";
+  width: 2px;
+  height: 34px;
+  background: linear-gradient(var(--accent), transparent);
+  animation: hint 1.8s ease-in-out infinite;
+}
+@keyframes hint {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* =========================================================
+   Секції
+   ========================================================= */
+.section { position: relative; padding-block: 96px; }
+.section.tight { padding-block: 48px; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+
+/* Смуга з цифрами */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0;
+  overflow: hidden;
+}
+.stat {
+  padding: 28px 24px;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat .value {
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.stat .value small { font-size: .5em; font-weight: 700; color: var(--accent); margin-left: 4px; }
+.stat .label { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+
+/* Таймлайн історії */
+.timeline {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  transform: translateX(-50%);
+  background: linear-gradient(var(--blue), var(--gold));
+  border-radius: 3px;
+}
+.timeline li {
+  position: relative;
+  width: 50%;
+  padding: 0 48px 56px 0;
+}
+.timeline li:nth-child(even) {
+  margin-left: 50%;
+  padding: 0 0 56px 48px;
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  right: -11px;
+  width: 22px;
+  height: 22px;
+  background: var(--bg);
+  border: 4px solid var(--accent);
+  transform: rotate(45deg);
+}
+.timeline li:nth-child(even)::before { right: auto; left: -11px; border-color: var(--gold); }
+.timeline .year {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.timeline li:nth-child(even) .year { color: var(--gold); }
+.timeline p { margin: 0; color: var(--muted); }
+
+/* Фото в таймлайні */
+.timeline .card { padding: 0; overflow: hidden; }
+.tl-photo { position: relative; margin: 0; overflow: hidden; }
+.tl-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg-2);
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.timeline li:hover .tl-photo img { transform: scale(1.05); }
+.tl-photo::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue) 0 70%, var(--gold) 70%);
+}
+.tl-photo figcaption {
+  position: absolute;
+  right: 8px;
+  bottom: 10px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(0,0,0,.55);
+  font-size: .7rem;
+}
+.tl-photo figcaption a { color: #fff; text-decoration: none; }
+.tl-body { padding: 22px 26px 26px; }
+
+/* Кольорові рішення */
+.gen { margin: 48px 0 18px; }
+.gen:first-of-type { margin-top: 0; }
+.gen h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.gen h3 span {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 18px;
+}
+.swatch { padding: 18px 18px 22px; transition: transform .25s ease; }
+.swatch:hover { transform: translateY(-4px); }
+.swatch .tank {
+  height: 96px;
+  margin-bottom: 16px;
+  border-radius: 56px 64px 22px 30px / 46px 52px 22px 26px;
+  box-shadow: inset 0 -10px 18px rgba(0,0,0,.25), inset 0 8px 14px rgba(255,255,255,.35), 0 6px 14px rgba(0,0,0,.15);
+  border: 1px solid var(--border);
+}
+.sw-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 8px; }
+.chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-size: .78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.model { color: var(--gold); font-size: .78rem; font-weight: 700; letter-spacing: .04em; }
+.swatch h4 { margin: 0 0 6px; font-size: 1.05rem; }
+.swatch p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+
+/* Розділ «Дизайн» — фото + список */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.split .photo {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.split .photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+.split .photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, transparent 50%, rgba(15, 47, 110, .55));
+}
+
+.feature-list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.feature-list li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 18px 20px;
+}
+.feature-list .ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 800;
+}
+.feature-list li:nth-child(even) .ic { background: rgba(185, 138, 34, .14); color: var(--gold); }
+.feature-list h3 { margin: 0 0 2px; font-size: 1.05rem; }
+.feature-list p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* Картки */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.card { padding: 26px; }
+.card p { margin: 0; color: var(--muted); }
+.card .num {
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+
+ul.features { margin: 0; padding-left: 20px; color: var(--muted); }
+ul.features li { margin-bottom: 6px; }
+
+/* CTA-банер */
+.cta {
+  position: relative;
+  overflow: hidden;
+  padding: 56px 48px;
+  border-radius: 24px;
+  background: linear-gradient(120deg, #0c2558, #1d4fa8);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.cta::before, .cta::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.cta::before {
+  right: -60px;
+  top: -60px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 36px solid rgba(227, 194, 122, .35);
+}
+.cta::after {
+  right: 160px;
+  bottom: -40px;
+  width: 220px;
+  height: 120px;
+  background: repeating-linear-gradient(-55deg, rgba(255,255,255,.12) 0 14px, transparent 14px 28px);
+}
+.cta h2 { color: #fff; position: relative; }
+.cta p { color: rgba(255,255,255,.85); margin: 0 0 24px; max-width: 32em; position: relative; }
+.cta .btn { background: var(--gold-soft); color: #1a1405; box-shadow: none; position: relative; }
+
+/* Таблиця */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td {
+  padding: 16px 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child th, tr:last-child td { border-bottom: none; }
+th { width: 40%; color: var(--muted); font-weight: 500; }
+td { font-weight: 650; font-variant-numeric: tabular-nums; }
+tbody tr { transition: background .2s; }
+tbody tr:hover { background: var(--accent-soft); }
+
+/* Hero сторінки двигуна */
+.page-hero { padding-block: 96px 40px; max-width: 820px; }
+
+/* Футер */
+.site-footer {
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+/* =========================================================
+   Анімація появи під час прокручування
+   (працює лише коли JS увімкнений — інакше все видно одразу)
+   ========================================================= */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--delay, 0s);
+}
+.js .reveal.from-left  { transform: translateX(-60px); }
+.js .reveal.from-right { transform: translateX(60px); }
+.js .reveal.zoom       { transform: scale(.92); }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .scroll-hint::after { animation: none; }
+}
+
+/* =========================================================
+   Мобільна версія
+   ========================================================= */
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; gap: 32px; min-height: 0; padding-block: 32px 72px; }
+  .hero-media::before { inset: 6% -8px 24px 8%; }
+  .hero-media { order: -1; }
+  .badge { left: 8px; bottom: 36px; }
+  .split { grid-template-columns: 1fr; gap: 32px; }
+  .section { padding-block: 64px; }
+
+  .timeline::before { left: 11px; }
+  .timeline li,
+  .timeline li:nth-child(even) { width: 100%; margin-left: 0; padding: 0 0 36px 44px; }
+  .timeline li::before,
+  .timeline li:nth-child(even)::before { left: 0; right: auto; }
+
+  .stat { border-right: none; border-bottom: 1px solid var(--border); }
+  .cta { padding: 40px 24px; }
+}
+
+@media (max-width: 520px) {
+  .header-inner { gap: 8px; }
+  .logo .mark { display: none; }
+  .nav a { padding: 6px 10px; font-size: .9rem; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 20px 16px; }
+  .stat:nth-child(odd) { border-right: 1px solid var(--border); }
+  th, td { padding: 12px 14px; }
+  th { width: 45%; }
+  .js .reveal.from-left, .js .reveal.from-right { transform: translateY(40px); }
+}
