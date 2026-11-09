@@ -29,7 +29,7 @@
   /* ---------- Поява блоків ----------
      Сама анімація — у CSS (scroll-driven або transition). Тут лише ставимо
      .is-visible: від нього залежать лічильники, тахометр і діаграма 240°. */
-  var watched = document.querySelectorAll('.reveal, .firing-visual');
+  var watched = document.querySelectorAll('.reveal, .firing-visual, .stagger');
 
   function show(el) {
     if (el.classList.contains('is-visible')) return;
