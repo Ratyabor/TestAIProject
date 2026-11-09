@@ -21,6 +21,10 @@
         <a href="index.html" aria-current="page">Головна</a>
         <a href="engine.html">Двигун</a>
       </nav>
+      <div class="livery-switch" role="group" aria-label="Лівреї сайту">
+        <button type="button" data-set-livery="red" aria-pressed="true" title="Legend Red" aria-label="Лівреї Legend Red"><i aria-hidden="true"></i></button>
+        <button type="button" data-set-livery="blue" aria-pressed="false" title="Legend Blue" aria-label="Лівреї Legend Blue"><i aria-hidden="true"></i></button>
+      </div>
       <button class="theme-toggle" type="button" role="switch" aria-checked="true" aria-label="Увімкнути світлу тему">
         <span class="knob" aria-hidden="true"></span>
       </button>
@@ -49,14 +53,20 @@
 
         <figure class="hero-media reveal zoom" style="--delay:.15s">
           <div class="frame">
-            <img src="images/hero-legend-red-960.jpg"
+            <img class="only-red" src="images/hero-legend-red-960.jpg"
                  srcset="images/hero-legend-red-960.jpg 960w, images/hero-legend-red-1920.jpg 1920w"
                  sizes="(max-width: 860px) 100vw, 680px"
                  alt="Yamaha XSR900 2024 року у кольорі Legend Red: білий бак з червоним блоком, червоне крило, золоті вилка й диски"
-                 width="1920" height="1441" fetchpriority="high">
+                 width="1920" height="1441" loading="lazy">
+            <img class="only-blue" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/2022_Yamaha_XSR900.png/960px-2022_Yamaha_XSR900.png"
+                 srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/2022_Yamaha_XSR900.png/960px-2022_Yamaha_XSR900.png 960w, https://upload.wikimedia.org/wikipedia/commons/f/f8/2022_Yamaha_XSR900.png 1402w"
+                 sizes="(max-width: 860px) 100vw, 680px"
+                 alt="Yamaha XSR900 2022 року у кольорі Legend Blue з золотою вилкою та дисками"
+                 width="1402" height="1027" loading="lazy">
           </div>
           <div class="number-plate" aria-label="119 кінських сил при 10 000 обертів за хвилину"><b>119</b><small>к.с. · 10 000</small></div>
-          <figcaption>Фото: власник мотоцикла</figcaption>
+          <figcaption class="only-red">Фото: власник мотоцикла</figcaption>
+          <figcaption class="only-blue">Фото: <a href="https://commons.wikimedia.org/wiki/File:2022_Yamaha_XSR900.png" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
         </figure>
       </div>
 
@@ -174,12 +184,17 @@
           <img src="images/design-side-800.jpg"
                srcset="images/design-side-800.jpg 800w, images/design-side-1600.jpg 1600w"
                sizes="(max-width: 860px) 100vw, 620px"
-               alt="Yamaha XSR900 Legend Red збоку: білий бак з логотипом і червоним блоком, круглий фар, золота вилка" loading="lazy" width="1600" height="1067">
-          <button class="hotspot" type="button" style="--x:53%;--y:36%" data-target="f-tank" aria-label="Бак Legend Red">1</button>
-          <button class="hotspot" type="button" style="--x:69.5%;--y:36%" data-target="f-light" aria-label="Круглий LED-фар">2</button>
-          <button class="hotspot" type="button" style="--x:72.5%;--y:64%" data-target="f-wheels" aria-label="Золоті диски Spinforged">3</button>
-          <button class="hotspot" type="button" style="--x:50%;--y:57%" data-target="f-frame" aria-label="Рама Deltabox">4</button>
-          <figcaption>Фото: власник мотоцикла</figcaption>
+               alt="Yamaha XSR900 Legend Red збоку: білий бак з логотипом і червоним блоком, круглий фар, золота вилка" class="only-red" loading="lazy" width="1600" height="1067">
+          <img class="only-blue" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/2022_Yamaha_XSR900.png/960px-2022_Yamaha_XSR900.png"
+               srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/2022_Yamaha_XSR900.png/960px-2022_Yamaha_XSR900.png 960w, https://upload.wikimedia.org/wikipedia/commons/f/f8/2022_Yamaha_XSR900.png 1402w"
+               sizes="(max-width: 860px) 100vw, 620px"
+               alt="Yamaha XSR900 2022: бак Legend Blue, круглий фар, золота вилка й диски" loading="lazy" width="1402" height="1027">
+          <button class="hotspot" type="button" style="--x:53%;--y:36%;--xb:42%;--yb:24%" data-target="f-tank" aria-label="Бак">1</button>
+          <button class="hotspot" type="button" style="--x:69.5%;--y:36%;--xb:73%;--yb:23%" data-target="f-light" aria-label="Круглий LED-фар">2</button>
+          <button class="hotspot" type="button" style="--x:72.5%;--y:64%;--xb:69%;--yb:80%" data-target="f-wheels" aria-label="Золоті диски Spinforged">3</button>
+          <button class="hotspot" type="button" style="--x:50%;--y:57%;--xb:50%;--yb:42%" data-target="f-frame" aria-label="Рама Deltabox">4</button>
+          <figcaption class="only-red">Фото: власник мотоцикла</figcaption>
+          <figcaption class="only-blue">Фото: <a href="https://commons.wikimedia.org/wiki/File:2022_Yamaha_XSR900.png" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption>
         </figure>
         <div>
           <div class="section-head reveal" style="margin-bottom:28px">
@@ -189,7 +204,7 @@
           <ul class="feature-list">
             <li id="f-tank" class="reveal from-right" style="--delay:.05s">
               <span class="ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20c0-7 5-12 13-12 6 0 11 3 11 9v3c0 2-1 3-3 3H7c-2 0-3-1-3-3Z"/><path d="M9 17l14-5"/><path d="M10 21l14-5"/></svg></span>
-              <div><span class="idx">01</span><h3>Бак Legend Red</h3><p>Білий бак з червоним блоком і чорною окантовкою, червоні крило й бокові панелі — відсилання до гоночних лівреї Marlboro 80-х.</p></div>
+              <div><span class="idx">01</span><h3 class="only-red">Бак Legend Red</h3><p class="only-red">Білий бак з червоним блоком і чорною окантовкою, червоні крило й бокові панелі — відсилання до гоночних лівреї Marlboro 80-х.</p><h3 class="only-blue">Бак Legend Blue</h3><p class="only-blue">Глибокий синій колір з білими й золотими акцентами — відсилання до гоночних лівреї Gauloises 80-х.</p></div>
             </li>
             <li id="f-light" class="reveal from-right" style="--delay:.15s">
               <span class="ic" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="6"/><path d="M16 5v3M16 24v3M5 16h3M24 16h3"/></svg></span>

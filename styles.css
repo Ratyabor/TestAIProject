@@ -1,18 +1,33 @@
 /* =========================================================
-   XSR900 · «Paddock / Racing Livery» — Legend Red 2024
-   Палітра взята з мотоцикла власника: білий бак з червоним блоком,
-   червоні крило й бокові панелі, чорні рама й двигун, золоті вилка й диски.
+   XSR900 · «Paddock / Racing Livery»
+   Дві лівреї × дві теми:
+   · Legend Red 2024 (за замовчуванням) — білий бак з червоним блоком,
+     червоні крило й панелі, чорні рама й двигун, золоті вилка й диски;
+   · Legend Blue 2022 — синій бак, жовтий speed block, білі смуги, золото.
+   Лівреї задає html[data-livery], тему — html[data-theme].
    ========================================================= */
 :root {
   /* Константи лівреї (однакові в обох темах) */
   --red: #e2401c;            /* Legend Red — великі заливки */
-  --red-deep: #8f1f0c;       /* тло банерів, білий текст ≈ 8:1 */
+  --red-deep: #8f1f0c;
+  --blue: #1f4cb0;           /* Legend Blue */
+  --blue-deep: #10295f;
+  --yellow: #f2c230;
   --gold: #c9a14a;           /* вилка й диски */
   --white: #f7f6f3;          /* білий бак */
   --ink: #0c0c0d;            /* рама й двигун */
 
-  /* Акцент змінюється конфігуратором лівреї */
-  --accent: #d4381a;         /* білий текст на ньому ≈ 4.6:1 */
+  /* Мотиви поточної лівреї: смуги, логотип, панелі, банер */
+  --m1: var(--red);          /* основний колір */
+  --m2: var(--white);        /* друга смуга */
+  --m3: var(--gold);         /* третя смуга */
+  --deep: var(--red-deep);   /* темний відтінок основного */
+  --cta-bg: #c2321a;         /* банер: дрібний білий текст ≥ 4.5:1 */
+  --led1: var(--white);
+  --led2: var(--gold);
+
+  /* Акцент змінюється перемикачем і конфігуратором лівреї */
+  --accent: #d4381a;         /* білий текст на ньому ≈ 4.8:1 */
   --accent-ink: #ffffff;
 
   /* Шрифти */
@@ -51,6 +66,45 @@
   --outline: rgba(14, 16, 20, .08);
   color-scheme: light;
 }
+
+/* ---------- Лівреї Legend Blue ---------- */
+[data-livery="blue"] {
+  --m1: var(--blue);
+  --m2: var(--yellow);
+  --m3: #f6f6f4;
+  --deep: var(--blue-deep);
+  --cta-bg: var(--blue);
+  --led1: var(--blue);
+  --led2: var(--yellow);
+  --accent: var(--yellow);
+  --accent-ink: #111111;
+}
+[data-livery="blue"]:not([data-theme="light"]) {
+  --bg: #0b0d10;
+  --bg-2: #111419;
+  --surface: #14171c;
+  --surface-2: #1b1f26;
+  --text: #eef0f3;
+  --muted: #9aa1ad;
+  --brand: #7aa2ff;
+}
+[data-livery="blue"][data-theme="light"] {
+  --bg: #f6f6f4;
+  --bg-2: #ecece9;
+  --surface: #ffffff;
+  --surface-2: #f0f0ed;
+  --text: #0e1014;
+  --muted: #555b66;
+  --border: rgba(14, 16, 20, .1);
+  --line: rgba(14, 16, 20, .2);
+  --brand: #1f4cb0;
+  /* жовтий акцент нечитабельний як текст на світлому тлі — заголовки синім */
+  --accent-text: var(--blue);
+}
+
+/* Елементи тільки для однієї лівреї (фото, підписи) */
+[data-livery="blue"] .only-red,
+:root:not([data-livery="blue"]) .only-blue { display: none !important; }
 
 /* ---------- База ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -94,12 +148,12 @@ button { font: inherit; color: inherit; }
 /* =========================================================
    Мотиви лівреї
    ========================================================= */
-/* Смуги червоний / білий / золото, як на Legend Red */
+/* Смуги лівреї: червоний / білий / золото або синій / жовтий / білий */
 .livery-stripe {
   background: linear-gradient(180deg,
-    var(--red) 0 58%,
-    var(--white) 58% 80%,
-    var(--gold) 80% 90%,
+    var(--m1) 0 58%,
+    var(--m2) 58% 80%,
+    var(--m3) 80% 90%,
     transparent 90%);
 }
 
@@ -165,12 +219,12 @@ button { font: inherit; color: inherit; }
   font: 900 1.15rem/1 var(--f-display);
   letter-spacing: -.02em;
 }
-.logo span { color: var(--accent); transition: color .3s; }
+.logo span { color: var(--accent-text, var(--accent)); transition: color .3s; }
 .logo .mark {
   width: 26px;
   height: 18px;
   transform: skewX(-20deg);
-  background: linear-gradient(180deg, var(--red) 0 55%, var(--white) 55% 80%, var(--gold) 80%);
+  background: linear-gradient(180deg, var(--m1) 0 55%, var(--m2) 55% 80%, var(--m3) 80%);
 }
 
 .nav {
@@ -208,6 +262,39 @@ button { font: inherit; color: inherit; }
 .nav a:hover::after { transform: scaleX(.4) skewX(-30deg); }
 .nav a[aria-current="page"] { color: var(--text); }
 .nav a[aria-current="page"]::after { transform: scaleX(1) skewX(-30deg); }
+
+/* Перемикач лівреї: червоний / синій */
+.livery-switch {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+.livery-switch button {
+  width: 24px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.livery-switch button i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25);
+  transition: transform .2s var(--ease);
+}
+.livery-switch [data-set-livery="red"] i  { background: linear-gradient(135deg, #f7f6f3 0 50%, #e2401c 50%); }
+.livery-switch [data-set-livery="blue"] i { background: linear-gradient(135deg, #1f4cb0 0 60%, #f2c230 60%); }
+.livery-switch button[aria-pressed="true"] { background: var(--surface-2); box-shadow: 0 0 0 1.5px var(--accent); }
+.livery-switch button[aria-pressed="true"] i,
+.livery-switch button:hover i { transform: scale(1.12); }
 
 /* Перемикач теми */
 .theme-toggle {
@@ -270,7 +357,7 @@ h1 {
   line-height: .95;
   letter-spacing: -.04em;
 }
-h1 .accent { color: var(--accent); transition: color .3s; }
+h1 .accent { color: var(--accent-text, var(--accent)); transition: color .3s; }
 h2 {
   margin: 0 0 16px;
   font-size: clamp(1.7rem, 3.8vw, 2.8rem);
@@ -460,7 +547,7 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0 0 auto 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--red) 0 60%, var(--white) 60% 85%, var(--gold) 85%);
+  background: linear-gradient(90deg, var(--m1) 0 60%, var(--m2) 60% 85%, var(--m3) 85%);
 }
 .stat {
   padding: 26px 22px 22px;
@@ -652,10 +739,13 @@ html:not(.js) .tach i.on { background: var(--accent); }
   background: var(--surface-2);
 }
 .hotspots img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.hotspots img.only-blue { aspect-ratio: 1402 / 1027; }
+[data-livery="blue"] .hotspot { left: var(--xb); top: var(--yb); }
 .hotspot {
   position: absolute;
   left: var(--x);
   top: var(--y);
+  transition: left .3s var(--ease), top .3s var(--ease);
   width: 36px;
   height: 36px;
   margin: -18px 0 0 -18px;
@@ -884,8 +974,8 @@ html:not(.js) .livery { grid-template-columns: 1fr; }
 }
 .tft-bar .mode { color: var(--accent); transition: color .3s; }
 .tft-bar .leds { display: flex; gap: 4px; }
-.tft-bar .leds i { width: 14px; height: 6px; background: var(--white); transform: skewX(-20deg); }
-.tft-bar .leds i:nth-child(n+4) { background: var(--gold); }
+.tft-bar .leds i { width: 14px; height: 6px; background: var(--led1); transform: skewX(-20deg); }
+.tft-bar .leds i:nth-child(n+4) { background: var(--led2); }
 .tft-bar .leds i:nth-child(n+6) { background: #ff2d17; }
 .tft-grid {
   display: grid;
@@ -1061,7 +1151,7 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   isolation: isolate;
   padding: 64px 48px;
   border-radius: var(--radius);
-  background: #c2321a;       /* трохи темніший за --red, щоб дрібний білий текст мав ≥ 4.5:1 */
+  background: var(--cta-bg);
   color: #fff;
 }
 .cta::before {
@@ -1072,7 +1162,7 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   top: 0;
   bottom: 0;
   width: 46%;
-  background: linear-gradient(90deg, var(--white) 0 22%, transparent 22% 30%, var(--gold) 30% 38%, transparent 38%);
+  background: linear-gradient(90deg, var(--m2) 0 22%, transparent 22% 30%, var(--m3) 30% 38%, transparent 38%);
   transform: skewX(-24deg);
   opacity: .95;
 }
@@ -1082,17 +1172,17 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   z-index: -1;
   inset: auto 0 0 0;
   height: 6px;
-  background: var(--red-deep);
+  background: var(--deep);
 }
 .cta .eyebrow { color: rgba(255, 255, 255, .92); }
 .cta .eyebrow::before { background: linear-gradient(90deg, #fff 0 40%, transparent 40% 55%, #fff 55% 70%, transparent 70%); }
 .cta h2 { color: #fff; max-width: 14em; }
 .cta p { color: rgba(255, 255, 255, .96); margin: 0 0 28px; max-width: 30em; }
-.cta .btn { background: #fff; border-color: #fff; color: var(--red-deep); }
+.cta .btn { background: #fff; border-color: #fff; color: var(--deep); }
 
 /* CTA з фото власника (сторінка двигуна) */
-.cta.has-photo { background: var(--red-deep); }
-.cta.has-photo::before { display: none; }
+:root:not([data-livery="blue"]) .cta.has-photo { background: var(--red-deep); }
+:root:not([data-livery="blue"]) .cta.has-photo::before { display: none; }
 .cta-photo {
   position: absolute;
   z-index: -1;
@@ -1208,6 +1298,16 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   .logo .mark { display: none; }
   .nav a { padding: 0 9px; letter-spacing: .06em; }
   .nav a::after { left: 9px; right: 9px; }
+  .livery-switch { padding: 1px; gap: 0; }
+  .livery-switch button { width: 22px; height: 22px; }
+  .theme-toggle { width: 46px; }
+  [data-theme="dark"] .theme-toggle .knob { transform: translateX(16px); }
+}
+@media (max-width: 390px) {
+  .header-inner { gap: 4px; }
+  .logo { font-size: .95em; }
+  .nav a { padding: 0 6px; letter-spacing: .02em; font-size: .72rem; }
+  .nav a::after { left: 6px; right: 6px; }
   .dash { grid-template-columns: 1fr 1fr; }
   .stat { padding: 20px 16px; }
   .stat:nth-child(odd) { border-right: 1px solid rgba(255, 255, 255, .07); }

@@ -153,6 +153,28 @@
       desc: document.querySelector('[data-stage-desc]')
     };
     var swatches = document.querySelectorAll('.sw[data-livery]');
+    var selectSwatch = function (sw) {
+        swatches.forEach(function (o) { o.setAttribute('aria-pressed', String(o === sw)); });
+        var name = sw.querySelector('.sw-name').textContent;
+        stageTank.className = 'tank ' + sw.dataset.livery;
+        stageTank.setAttribute('aria-label', 'Схема фарбування ' + name);
+        fields.name.textContent = name;
+        fields.year.textContent = sw.dataset.year;
+        fields.model.textContent = sw.dataset.model;
+        fields.desc.textContent = sw.dataset.desc;
+    };
+    // Сцена стартує з лівреї, обраної в шапці (червона або синя)
+    var siteSwatch = function () {
+      var cls = root.getAttribute('data-livery') === 'blue' ? 't-legend-blue' : 't-legend-red';
+      return document.querySelector('.sw[data-livery="' + cls + '"]');
+    };
+    if (siteSwatch()) selectSwatch(siteSwatch());
+    // Перемикач у шапці: прибрати акцент конфігуратора й показати відповідний бак
+    document.addEventListener('liverychange', function () {
+      root.style.removeProperty('--accent');
+      root.style.removeProperty('--accent-ink');
+      if (siteSwatch()) selectSwatch(siteSwatch());
+    });
     swatches.forEach(function (sw) {
       sw.addEventListener('click', function () {
         swatches.forEach(function (o) { o.setAttribute('aria-pressed', String(o === sw)); });
