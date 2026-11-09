@@ -1181,8 +1181,8 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
 .cta .btn { background: #fff; border-color: #fff; color: var(--deep); }
 
 /* CTA з фото власника (сторінка двигуна) */
-:root:not([data-livery="blue"]) .cta.has-photo { background: var(--red-deep); }
-:root:not([data-livery="blue"]) .cta.has-photo::before { display: none; }
+.cta.has-photo { background: var(--deep); }
+.cta.has-photo::before { display: none; }
 .cta-photo {
   position: absolute;
   z-index: -1;
@@ -1191,7 +1191,7 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   width: 64%;
   height: 100%;
   object-fit: cover;
-  object-position: 22% 64%;
+  object-position: var(--pos, 22% 64%);
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 45%);
           mask-image: linear-gradient(90deg, transparent 0, #000 45%);
 }
