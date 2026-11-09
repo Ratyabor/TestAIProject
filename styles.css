@@ -1,21 +1,19 @@
 /* =========================================================
-   XSR900 · «Paddock / Racing Livery»
-   Палітра — лівреї Yamaha 80-х: Legend Blue, жовтий speed block,
-   золото дисків, білий обтічник і асфальт паддоку.
+   XSR900 · «Paddock / Racing Livery» — Legend Red 2024
+   Палітра взята з мотоцикла власника: білий бак з червоним блоком,
+   червоні крило й бокові панелі, чорні рама й двигун, золоті вилка й диски.
    ========================================================= */
 :root {
   /* Константи лівреї (однакові в обох темах) */
-  --blue: #1f4cb0;
-  --blue-deep: #10295f;
-  --yellow: #f2c230;
-  --gold: #c9a14a;
-  --white: #f6f6f4;
-  --red: #e0322b;
-  --ink: #0b0d10;
+  --red: #e2401c;            /* Legend Red — великі заливки */
+  --red-deep: #8f1f0c;       /* тло банерів, білий текст ≈ 8:1 */
+  --gold: #c9a14a;           /* вилка й диски */
+  --white: #f7f6f3;          /* білий бак */
+  --ink: #0c0c0d;            /* рама й двигун */
 
   /* Акцент змінюється конфігуратором лівреї */
-  --accent: var(--yellow);
-  --accent-ink: #111;
+  --accent: #d4381a;         /* білий текст на ньому ≈ 4.6:1 */
+  --accent-ink: #ffffff;
 
   /* Шрифти */
   --f-display: "Unbounded", "Arial Black", system-ui, sans-serif;
@@ -27,29 +25,29 @@
   --ease: cubic-bezier(.2, .7, .2, 1);
 
   /* Темна тема — за замовчуванням */
-  --bg: #0b0d10;
-  --bg-2: #111419;
-  --surface: #14171c;
-  --surface-2: #1b1f26;
-  --text: #eef0f3;
-  --muted: #9aa1ad;
+  --bg: #0d0d0e;
+  --bg-2: #121212;
+  --surface: #161616;
+  --surface-2: #1e1d1c;
+  --text: #f1efec;
+  --muted: #a39f99;
   --border: rgba(255, 255, 255, .09);
   --line: rgba(255, 255, 255, .16);
-  --brand: #7aa2ff;           /* синій для тексту й посилань */
+  --brand: #ff7a5c;           /* червоний для тексту й посилань */
   --outline: rgba(255, 255, 255, .09);
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --bg: #f6f6f4;
-  --bg-2: #ecece9;
+  --bg: #f7f6f3;
+  --bg-2: #eeece8;
   --surface: #ffffff;
-  --surface-2: #f0f0ed;
-  --text: #0e1014;
-  --muted: #555b66;
-  --border: rgba(14, 16, 20, .1);
-  --line: rgba(14, 16, 20, .2);
-  --brand: #1f4cb0;
+  --surface-2: #f1efeb;
+  --text: #121212;
+  --muted: #5a5550;
+  --border: rgba(18, 18, 18, .1);
+  --line: rgba(18, 18, 18, .2);
+  --brand: #b42d12;
   --outline: rgba(14, 16, 20, .08);
   color-scheme: light;
 }
@@ -96,12 +94,12 @@ button { font: inherit; color: inherit; }
 /* =========================================================
    Мотиви лівреї
    ========================================================= */
-/* Смуги синій / жовтий / білий, як на баку Legend Blue */
+/* Смуги червоний / білий / золото, як на Legend Red */
 .livery-stripe {
   background: linear-gradient(180deg,
-    var(--blue) 0 58%,
-    var(--yellow) 58% 80%,
-    var(--white) 80% 90%,
+    var(--red) 0 58%,
+    var(--white) 58% 80%,
+    var(--gold) 80% 90%,
     transparent 90%);
 }
 
@@ -172,7 +170,7 @@ button { font: inherit; color: inherit; }
   width: 26px;
   height: 18px;
   transform: skewX(-20deg);
-  background: linear-gradient(180deg, var(--blue) 0 55%, var(--yellow) 55% 80%, var(--white) 80%);
+  background: linear-gradient(180deg, var(--red) 0 55%, var(--white) 55% 80%, var(--gold) 80%);
 }
 
 .nav {
@@ -462,7 +460,7 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0 0 auto 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--blue) 0 60%, var(--yellow) 60% 85%, var(--white) 85%);
+  background: linear-gradient(90deg, var(--red) 0 60%, var(--white) 60% 85%, var(--gold) 85%);
 }
 .stat {
   padding: 26px 22px 22px;
@@ -510,7 +508,7 @@ p { text-wrap: pretty; }
 .tach i:nth-child(n+11) { background: rgba(224, 50, 43, .35); }
 .dash.is-visible .tach i.on,
 html:not(.js) .tach i.on { background: var(--accent); }
-.dash.is-visible .tach i.on:nth-child(n+11) { background: var(--red); }
+.dash.is-visible .tach i.on:nth-child(n+11) { background: #ff2d17; }
 /* поступове «розкручування» */
 .tach i:nth-child(1)  { transition-delay: .05s; }
 .tach i:nth-child(2)  { transition-delay: .1s; }
@@ -653,7 +651,7 @@ html:not(.js) .tach i.on { background: var(--accent); }
   overflow: hidden;
   background: var(--surface-2);
 }
-.hotspots img { width: 100%; height: auto; aspect-ratio: 1402 / 1027; object-fit: cover; }
+.hotspots img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
 .hotspot {
   position: absolute;
   left: var(--x);
@@ -856,7 +854,7 @@ html:not(.js) .livery { grid-template-columns: 1fr; }
 .t-radical-white { background: linear-gradient(160deg, #f4f4f2 0 48%, #c8102e 48% 58%, #1d4fa8 58% 68%, #f4f4f2 68%); }
 .t-legend-blue   { background: linear-gradient(165deg, #1d4fa8 0 52%, #f2c230 52% 60%, #fff 60% 64%, #1d4fa8 64%); }
 .t-midnight      { background: linear-gradient(180deg, #2a2d33 0 55%, #111 55%); }
-.t-silky-white   { background: linear-gradient(160deg, #f6f6f4 0 50%, #d6001c 50% 80%, #f6f6f4 80%); }
+.t-legend-red    { background: linear-gradient(100deg, transparent 0 17%, #111 17% 18.5%, #e2401c 18.5% 47%, #111 47% 48.5%, transparent 48.5%) 0 34% / 100% 46% no-repeat, linear-gradient(180deg, #f7f6f3 0 74%, #e2401c 74%); }
 .t-pastel-grey   { background: linear-gradient(180deg, #5a5d63 0 55%, #3b3e43 55%); }
 .t-ivory         { background: linear-gradient(180deg, #efe6d2 0 60%, #7a4a2a 60%); }
 .t-legend-yellow { background: repeating-linear-gradient(180deg, #111 0 7px, #fff 7px 10px) 55% 60% / 40% 30% no-repeat, #f2c230; }
@@ -886,9 +884,9 @@ html:not(.js) .livery { grid-template-columns: 1fr; }
 }
 .tft-bar .mode { color: var(--accent); transition: color .3s; }
 .tft-bar .leds { display: flex; gap: 4px; }
-.tft-bar .leds i { width: 14px; height: 6px; background: #1f4cb0; transform: skewX(-20deg); }
-.tft-bar .leds i:nth-child(n+4) { background: var(--yellow); }
-.tft-bar .leds i:nth-child(n+6) { background: var(--red); }
+.tft-bar .leds i { width: 14px; height: 6px; background: var(--white); transform: skewX(-20deg); }
+.tft-bar .leds i:nth-child(n+4) { background: var(--gold); }
+.tft-bar .leds i:nth-child(n+6) { background: #ff2d17; }
 .tft-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1063,7 +1061,7 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   isolation: isolate;
   padding: 64px 48px;
   border-radius: var(--radius);
-  background: var(--blue);
+  background: #c2321a;       /* трохи темніший за --red, щоб дрібний білий текст мав ≥ 4.5:1 */
   color: #fff;
 }
 .cta::before {
@@ -1074,7 +1072,7 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   top: 0;
   bottom: 0;
   width: 46%;
-  background: linear-gradient(90deg, var(--yellow) 0 22%, transparent 22% 30%, var(--white) 30% 38%, transparent 38%);
+  background: linear-gradient(90deg, var(--white) 0 22%, transparent 22% 30%, var(--gold) 30% 38%, transparent 38%);
   transform: skewX(-24deg);
   opacity: .95;
 }
@@ -1084,13 +1082,32 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); 
   z-index: -1;
   inset: auto 0 0 0;
   height: 6px;
-  background: var(--blue-deep);
+  background: var(--red-deep);
 }
-.cta .eyebrow { color: rgba(255, 255, 255, .75); }
+.cta .eyebrow { color: rgba(255, 255, 255, .92); }
 .cta .eyebrow::before { background: linear-gradient(90deg, #fff 0 40%, transparent 40% 55%, #fff 55% 70%, transparent 70%); }
 .cta h2 { color: #fff; max-width: 14em; }
-.cta p { color: rgba(255, 255, 255, .85); margin: 0 0 28px; max-width: 30em; }
-.cta .btn { background: #fff; border-color: #fff; color: var(--blue-deep); }
+.cta p { color: rgba(255, 255, 255, .96); margin: 0 0 28px; max-width: 30em; }
+.cta .btn { background: #fff; border-color: #fff; color: var(--red-deep); }
+
+/* CTA з фото власника (сторінка двигуна) */
+.cta.has-photo { background: var(--red-deep); }
+.cta.has-photo::before { display: none; }
+.cta-photo {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: 64%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 22% 64%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 45%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 45%);
+}
+@media (max-width: 860px) {
+  .cta-photo { width: 100%; opacity: .35; -webkit-mask-image: none; mask-image: none; }
+}
 
 /* ---------- Футер ---------- */
 .site-footer {
