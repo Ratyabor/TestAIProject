@@ -8,10 +8,7 @@
     try { return localStorage.getItem(KEY); } catch (e) { return null; }
   }
 
-  function systemTheme() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-
+  // Темна «паддок»-тема — за замовчуванням; світла лише за явним вибором.
   function apply(theme) {
     root.setAttribute('data-theme', theme);
     var btn = document.querySelector('.theme-toggle');
@@ -22,7 +19,7 @@
     }
   }
 
-  apply(saved() || systemTheme());
+  apply(saved() || 'dark');
 
   document.addEventListener('DOMContentLoaded', function () {
     var btn = document.querySelector('.theme-toggle');

@@ -1,25 +1,19 @@
 <!doctype html>
-<html lang="uk">
+<html lang="uk" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Двигун XSR900</title>
-  <meta name="description" content="Двигун CP3 мотоцикла Yamaha XSR900: рядна трійка 889 см³, технічні характеристики та особливості.">
+  <meta name="description" content="Двигун CP3 мотоцикла Yamaha XSR900: рядна трійка 889 см³, інтервал запалювання 240°, технічні характеристики та особливості.">
+  <meta name="theme-color" content="#0b0d10">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Onest:wght@400;500;600;700&family=Unbounded:wght@700;800;900&display=swap">
   <link rel="stylesheet" href="styles.css">
   <script src="theme.js"></script>
   <script src="main.js" defer></script>
 </head>
 <body>
-  <div class="bg-shapes" aria-hidden="true">
-    <span class="s dots"></span>
-    <span class="s tri-blue" data-speed="-0.12"></span>
-    <span class="s ring-blue" data-speed="0.25"></span>
-    <span class="s diamond" data-speed="0.35" data-rotate="45"></span>
-    <span class="s ring-gold" data-speed="-0.2"></span>
-    <span class="s stripes" data-speed="-0.3" data-rotate="0"></span>
-    <span class="s hex" data-speed="-0.45"></span>
-  </div>
-
   <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="index.html"><i class="mark" aria-hidden="true"></i><b>XSR<span>900</span></b></a>
@@ -27,31 +21,128 @@
         <a href="index.html">Головна</a>
         <a href="engine.html" aria-current="page">Двигун</a>
       </nav>
-      <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Увімкнути темну тему">
+      <button class="theme-toggle" type="button" role="switch" aria-checked="true" aria-label="Увімкнути світлу тему">
         <span class="knob" aria-hidden="true"></span>
       </button>
     </div>
   </header>
 
   <main>
-    <section class="container">
-      <div class="page-hero">
-        <p class="eyebrow reveal">Двигун CP3</p>
-        <h1 class="reveal" style="--delay:.1s">Рядна трійка <span class="gold">889 см³</span></h1>
-        <p class="lead reveal" style="--delay:.2s">
-          Серце XSR900 — трициліндровий двигун CP3 (Crossplane Concept). Інтервал
-          запалювання 240° дає рівну, «лінійну» тягу на низах і характерний звук,
-          а на високих обертах двигун охоче крутиться до відсічки.
-        </p>
+    <section class="page-hero" aria-labelledby="engine-title">
+      <p class="hero-word" aria-hidden="true">CP3</p>
+      <div class="hero-stripe livery-stripe" aria-hidden="true"></div>
+      <div class="container">
+        <div class="inner">
+          <p class="eyebrow reveal">Двигун CP3 · Crossplane Concept</p>
+          <h1 id="engine-title" class="reveal" style="--delay:.1s">Рядна трійка <span class="accent">889&nbsp;см³</span></h1>
+          <p class="lead reveal" style="--delay:.2s">
+            Серце XSR900 — трициліндровий двигун CP3 (Crossplane Concept). Інтервал
+            запалювання 240° дає рівну, «лінійну» тягу на низах і характерний звук,
+            а на високих обертах двигун охоче крутиться до відсічки.
+          </p>
+        </div>
       </div>
     </section>
 
     <section class="container section tight" aria-label="Ключові цифри двигуна">
-      <div class="panel stats reveal">
+      <div class="dash reveal">
         <div class="stat"><div class="value"><span data-count="889">889</span><small>см³</small></div><div class="label">Робочий об'єм</div></div>
-        <div class="stat"><div class="value"><span data-count="119">119</span><small>к.с.</small></div><div class="label">при 10 000 об/хв</div></div>
-        <div class="stat"><div class="value"><span data-count="93">93</span><small>Н·м</small></div><div class="label">при 7 000 об/хв</div></div>
+        <div class="stat">
+          <div class="value"><span data-count="119">119</span><small>к.с.</small></div><div class="label">Потужність</div>
+          <div class="tach" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+          <div class="note">при 10 000 об/хв</div>
+        </div>
+        <div class="stat">
+          <div class="value"><span data-count="93">93</span><small>Н·м</small></div><div class="label">Крутний момент</div>
+          <div class="tach" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="note">при 7 000 об/хв</div>
+        </div>
         <div class="stat"><div class="value"><span data-count="3">3</span><small>цил.</small></div><div class="label">12 клапанів, DOHC</div></div>
+      </div>
+    </section>
+
+    <!-- ================= 240° ================= -->
+    <section class="container section" aria-labelledby="firing-title">
+      <div class="firing">
+        <div class="panel firing-visual reveal from-left">
+          <svg viewBox="0 0 320 320" role="img" aria-labelledby="firing-svg-title">
+            <title id="firing-svg-title">Робочий цикл 720°: циліндри 1, 2 і 3 спалахують рівно через кожні 240° обертання колінвала</title>
+            <circle class="ring" cx="160" cy="160" r="120"/>
+            <g class="ticks">
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(30 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(60 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(90 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(150 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(180 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(210 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(270 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(300 160 160)"/>
+              <line x1="160" y1="32" x2="160" y2="40" transform="rotate(330 160 160)"/>
+            </g>
+            <!-- дуги по 240° колінвала (120° на колі 720°) -->
+            <path class="arc" d="M 180.8 41.8 A 120 120 0 0 1 272.8 201"/>
+            <path class="arc" d="M 251.9 237.1 A 120 120 0 0 1 68.1 237.1"/>
+            <path class="arc" d="M 47.2 201 A 120 120 0 0 1 139.2 41.8"/>
+            <text class="lbl" x="286" y="88">240°</text>
+            <text class="lbl" x="160" y="304">240°</text>
+            <text class="lbl" x="34" y="88">240°</text>
+
+            <line class="pointer" x1="160" y1="160" x2="160" y2="56"/>
+            <circle cx="160" cy="160" r="5" fill="currentColor" opacity=".5"/>
+
+            <g class="fire" data-cyl="1"><circle cx="160" cy="40" r="17"/><text x="160" y="40">1</text></g>
+            <g class="fire" data-cyl="2"><circle cx="263.9" cy="220" r="17"/><text x="263.9" y="220">2</text></g>
+            <g class="fire" data-cyl="3"><circle cx="56.1" cy="220" r="17"/><text x="56.1" y="220">3</text></g>
+
+            <text class="center-1" x="160" y="168">720°</text>
+            <text class="center-2" x="160" y="190">РОБОЧИЙ ЦИКЛ</text>
+          </svg>
+          <div class="cylinders" aria-hidden="true">
+            <div class="cyl"><i></i>ЦИЛ. 1</div>
+            <div class="cyl"><i></i>ЦИЛ. 2</div>
+            <div class="cyl"><i></i>ЦИЛ. 3</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-head reveal" style="margin-bottom:24px">
+            <p class="eyebrow">Інтервал запалювання</p>
+            <h2 id="firing-title">Спалах кожні 240°</h2>
+            <p>Чотиритактний цикл займає два оберти колінвала — 720°. Три циліндри ділять їх порівну: кожні 240° спрацьовує наступний циліндр у порядку 1-2-3.</p>
+          </div>
+          <ul class="features reveal" style="--delay:.1s">
+            <li>Рівномірні імпульси дають плавну, передбачувану тягу на низах</li>
+            <li>Характерний «хрипкий» звук трійки, не схожий ні на двоциліндровий, ні на четвірку</li>
+            <li>Компактний і вузький двигун у порівнянні з рядною четвіркою</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ПОРІВНЯННЯ ================= -->
+    <section class="container section" aria-labelledby="compare-title">
+      <div class="section-head reveal">
+        <p class="eyebrow">Еволюція</p>
+        <h2 id="compare-title">847 → 889 см³</h2>
+        <p>Друге покоління отримало довший хід поршня при тому самому діаметрі циліндра.</p>
+      </div>
+      <div class="panel compare reveal" role="table" aria-label="Порівняння двигунів першого й другого покоління">
+        <div role="row" style="display:contents">
+          <div class="h" role="columnheader">Параметр</div>
+          <div class="h" role="columnheader">2016–2021</div>
+          <div class="h new" role="columnheader">2022+</div>
+        </div>
+        <div role="row" style="display:contents">
+          <div class="k" role="rowheader">Об'єм</div><div class="v old" role="cell">847 см³</div><div class="v new" role="cell">889 см³</div>
+        </div>
+        <div role="row" style="display:contents">
+          <div class="k" role="rowheader">Діаметр × хід</div><div class="v old" role="cell">78,0 × 59,1</div><div class="v new" role="cell">78,0 × 62,0</div>
+        </div>
+        <div role="row" style="display:contents">
+          <div class="k" role="rowheader">Потужність</div><div class="v old" role="cell">115 к.с.</div><div class="v new" role="cell">119 к.с.</div>
+        </div>
+        <div role="row" style="display:contents">
+          <div class="k" role="rowheader">Крутний момент</div><div class="v old" role="cell">87,5 Н·м</div><div class="v new" role="cell">93 Н·м</div>
+        </div>
       </div>
     </section>
 
@@ -111,16 +202,16 @@
 
     <section class="container section">
       <div class="cta reveal zoom">
-        <p class="eyebrow" style="color:var(--gold-soft)">XSR900</p>
+        <p class="eyebrow">XSR900</p>
         <h2>Повернутися до мотоцикла</h2>
-        <p>Історія моделі, дизайн у стилі 80-х та електроніка — на головній сторінці.</p>
-        <a class="btn" href="index.html">← На головну</a>
+        <p>Історія моделі, дизайн у стилі 80-х, лівреї та електроніка — на головній сторінці.</p>
+        <a class="btn" href="index.html"><span>← На головну</span></a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">Навчальний сайт про Yamaha XSR900. Характеристики наведено для моделі 2022+ року.</div>
+    <div class="container"><span class="speed-block" aria-hidden="true"></span>Навчальний сайт про Yamaha XSR900. Характеристики наведено для моделі 2022+ року.</div>
   </footer>
 </body>
 </html>
