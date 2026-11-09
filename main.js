@@ -185,7 +185,7 @@
         fields.year.textContent = sw.dataset.year;
         fields.model.textContent = sw.dataset.model;
         fields.desc.textContent = sw.dataset.desc;
-        // Акцент усього сайту підлаштовується під обрану лівреї
+        // Акцент усього сайту підлаштовується під обрану ліврею
         root.style.setProperty('--accent', sw.dataset.accent);
         root.style.setProperty('--accent-ink', sw.dataset.ink);
       });
